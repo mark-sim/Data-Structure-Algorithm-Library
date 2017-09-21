@@ -5,8 +5,6 @@
 #include <vector>
 
 class Quicksort {
-	private:
-		
 	public:
 		static void quickSort(std::vector<int> &list);
 };
