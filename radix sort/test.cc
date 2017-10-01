@@ -19,28 +19,21 @@ void assertRS(vector<int> &list) {
 	int size = list.size();
 	
 	for(int i=0; i<size; i++) {
-		/*
+		
 		for(int j=i+1; j<size; j++) {
 			assert(list[i] <= list[j]);
 		}
-		*/
-		//cout << list[i] << " ";
+		
 	}
-	//cout << endl;
-	//cout << "test passed."  << endl;
+	cout << "test passed."  << endl;
 	
 }
 
 //Creates 100 tests with random elements and ensures that all the lists are in ascending order
 int main() {
 	
-
-	vector<int> list = {3,4,5,3,2,4,23,3,4,2,4,3,4,3};
-	radixSort::radixsort(list);
-
-	/*
 	srand(time(NULL));
-	int numTests = 99;
+	int numTests = 0;
 	while(numTests < NUM_TESTS) {
 		int numElements = rand() % MAX_ELEMENTS; 	// puts 0 - 99 elements randomly
 		while(numElements > 0) {
@@ -55,6 +48,6 @@ int main() {
 		numTests++;
 	}
 	cout << "All tests passed." << endl;
-	*/
+	
 	
 }

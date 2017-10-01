@@ -11,12 +11,13 @@ void countingsort(vector<int> &list, int size, int bitIndex) {
 
  	// set all the buckets to 0
  	int count[RADIX] = {0};
-
+ 	vector<int> bitValues;
  	// set occurence of each number [min,max] where count[0] is occurence of min
  	// and count[max-min] is occurence of max.
  	for(int i=0; i<size; i++) {
  		int bitValue = (list[i] >> bitIndex) & 1;
  		if(bitIndex == 31) bitValue = (bitValue ^ 1) & 1;
+ 		bitValues.emplace_back(bitValue);
  		count[bitValue]++;
  	}
 
@@ -28,11 +29,11 @@ void countingsort(vector<int> &list, int size, int bitIndex) {
  	vector<int> copyList = list;
 
  	for(int i=0; i<size; i++) {
- 		int bitValue = (list[i] >> bitIndex) & 1;
- 		if(bitIndex == 31) bitValue = (bitValue ^ 1) & 1;
+ 		int bitValue = bitValues[i];
  		list[count[bitValue]] = copyList[i];
  		count[bitValue]++;
  	}
+
 }
 
 void radixSort::radixsort(vector<int> &list) {
@@ -43,16 +44,4 @@ void radixSort::radixsort(vector<int> &list) {
 	for (int i=0; i<NUM_BITS; i++) {
 		countingsort(list,size,i);
 	}
-
-
-	for(int i=0; i<size; i++) {
-		cout << list[i] << " ";
-	}
-	cout << endl;
-
-}
-
-int main() {
-	vector<int> list = {-2,1,1,1,1,0,0,0};
-	radixSort::radixsort(list);
 }
