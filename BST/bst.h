@@ -25,6 +25,8 @@ class BST {
 		bool search(int key);
 		//prints the BST in-order; Always called on the root.
 		void print(BST *node);
+		//frees all the heap allocated memory associated with bst
+		void freeBST(BST *node);
 };
 
 

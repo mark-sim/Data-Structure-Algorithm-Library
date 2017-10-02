@@ -15,14 +15,8 @@ BST::BST(vector<int> &list) : key{list[0]}, left{nullptr}, right{nullptr} {
 
 void BST::swap(BST *r) {
 	int tempKey = this->key;
-	BST *tempLeft = this->left;
-	BST *tempRight = this->right;
 	this->key = r->key;
-	this->left = r->left;
-	this->right = r->right;
 	r->key = tempKey;
-	r->left = tempLeft;
-	r->right = tempRight;
 }
 
 void BST::insert(int keyToBeInserted) {
@@ -44,6 +38,14 @@ void BST::print(BST *node) {
 	print(node->left);
 	cout << node->key << " ";
 	print(node->right);
+}
+
+void BST::freeBST(BST *node) {
+	if(node == nullptr) return;
+	freeBST(node->left);
+	BST *tmp = node->right;
+	free(node);
+	freeBST(tmp);
 }
 
 
@@ -84,7 +86,9 @@ BST *BST::deleteKey(int keyToBeDeleted, BST *root) {
 		root = root->left;
 	}
 	temp->swap(root);
-	temp->right = deleteKey(keyToBeDeleted, root);
+	temp->right = deleteKey(keyToBeDeleted, temp->right);
+	return temp;
+
 }
 
 bool BST::search(int key) {
@@ -94,18 +98,3 @@ bool BST::search(int key) {
 	else return false;
 }
 
-int main() {
-	vector<int> list = {3,4,5,6,7,8,9,2,-5,-7};
-	BST *bst = new BST(list);
-	bst->print(bst);
-	cout << endl;
-	cout << bst->search(3) << endl;
-	cout << bst->search(-7) << endl;
-	cout << bst->search(2) << endl;
-	cout << bst->search(10) << endl;
-	cout << bst->search(30) << endl;
-	bst->deleteKey(3,bst);
-	bst->print(bst);
-	cout << bst->search(3) << endl;
-
-}
